@@ -26,10 +26,12 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 button {
   font: inherit;
+  min-width: 44px;
 }
 
 .app-shell {
@@ -178,6 +180,16 @@ h2 {
   cursor: pointer;
   font-weight: 800;
   padding: 10px 14px;
+}
+
+.text-toggle,
+.primary-action,
+.danger-button,
+.ghost-button,
+.answer-button,
+.tab-button,
+.phase-button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .moon-detail {
@@ -335,6 +347,7 @@ h2 {
   display: block;
   margin: 0 auto;
   max-width: 100%;
+  width: min(100%, 320px);
 }
 
 .dimension-bars {
@@ -391,6 +404,7 @@ h2 {
   margin: 14px 0;
   overflow-x: auto;
   padding-bottom: 4px;
+  scrollbar-width: thin;
 }
 
 .tab-button,
@@ -454,25 +468,113 @@ h2 {
 }
 
 @media (max-width: 760px) {
+  body {
+    font-size: 15px;
+  }
+
   .app-shell {
-    padding-inline: 14px;
+    padding: 14px 12px 36px;
   }
 
   .hero,
-  .moon-main,
   .result-layout {
     grid-template-columns: 1fr;
   }
 
+  .hero {
+    align-items: start;
+    gap: 12px;
+    padding: 10px 0 14px;
+  }
+
+  body[data-view="quizView"] .hero,
+  body[data-view="resultView"] .hero {
+    display: none;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 10vw, 2.75rem);
+    line-height: 1.12;
+  }
+
+  h2 {
+    font-size: 1.32rem;
+  }
+
+  .lead,
+  .intro-panel p,
+  .moon-card p,
+  .score-copy,
+  .dialog p,
+  .care-detail {
+    line-height: 1.68;
+  }
+
   .brand-mark,
   .moon-orb {
-    height: 70px;
+    height: 62px;
+  }
+
+  .heart {
+    font-size: 34px;
+  }
+
+  .flower {
+    bottom: 11px;
+    font-size: 16px;
+    right: 13px;
+  }
+
+  .moon-card,
+  .intro-panel,
+  .history-preview,
+  .question-card,
+  .score-panel,
+  .dimension-panel,
+  .priority-panel,
+  .care-board {
+    box-shadow: 0 10px 28px rgba(89, 55, 44, 0.1);
+  }
+
+  .moon-card,
+  .intro-panel,
+  .history-preview,
+  .priority-panel,
+  .care-board,
+  .score-panel,
+  .dimension-panel,
+  .question-card {
+    padding: 16px;
+  }
+
+  .moon-main {
+    align-items: start;
+    grid-template-columns: 62px 1fr;
+  }
+
+  .moon-orb {
+    font-size: 30px;
+  }
+
+  .moon-countdown {
+    display: grid;
+    gap: 8px;
+  }
+
+  .moon-countdown span,
+  .soft-badge {
+    border-radius: 8px;
+    justify-content: center;
+    padding: 9px 10px;
+    text-align: center;
+    width: 100%;
   }
 
   .section-heading,
   .quiz-top {
     align-items: stretch;
     flex-direction: column;
+    gap: 10px;
   }
 
   .progress-track {
@@ -483,5 +585,134 @@ h2 {
   .history-item {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .primary-action,
+  .danger-button,
+  .ghost-button,
+  .text-toggle {
+    justify-content: center;
+    min-height: 50px;
+    width: 100%;
+  }
+
+  .question-card h3 {
+    font-size: 1.45rem;
+    line-height: 1.42;
+  }
+
+  .answer-grid {
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .answer-button {
+    min-height: 58px;
+    padding: 14px;
+  }
+
+  .quiz-actions {
+    margin-top: 14px;
+  }
+
+  #nextQuestionButton {
+    width: 100%;
+  }
+
+  .result-layout {
+    gap: 14px;
+  }
+
+  .dimension-label {
+    gap: 8px;
+  }
+
+  .priority-card {
+    padding: 14px;
+  }
+
+  .tab-row,
+  .phase-row {
+    gap: 6px;
+    margin: 12px -4px;
+    padding: 0 4px 6px;
+  }
+
+  .tab-button,
+  .phase-button {
+    min-height: 44px;
+    padding: 9px 12px;
+  }
+
+  .care-detail {
+    padding: 14px;
+  }
+
+  .dialog {
+    max-width: min(100%, 420px);
+    padding: 20px;
+  }
+
+  .dialog-actions {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 420px) {
+  .app-shell {
+    padding-inline: 10px;
+  }
+
+  .hero {
+    grid-template-columns: 52px 1fr;
+  }
+
+  .brand-mark {
+    height: 52px;
+  }
+
+  .heart {
+    font-size: 29px;
+  }
+
+  .flower {
+    bottom: 8px;
+    font-size: 14px;
+    right: 10px;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 9.5vw, 2.25rem);
+  }
+
+  .eyebrow {
+    font-size: 0.78rem;
+  }
+
+  .moon-card,
+  .intro-panel,
+  .history-preview,
+  .priority-panel,
+  .care-board,
+  .score-panel,
+  .dimension-panel,
+  .question-card {
+    padding: 14px;
+  }
+
+  .moon-main {
+    grid-template-columns: 54px 1fr;
+  }
+
+  .moon-orb {
+    height: 54px;
+  }
+
+  .history-preview canvas {
+    height: 190px;
+  }
+
+  .question-card h3 {
+    font-size: 1.32rem;
   }
 }

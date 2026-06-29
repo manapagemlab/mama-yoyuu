@@ -109,6 +109,7 @@ const $ = (id) => document.getElementById(id);
 document.addEventListener("DOMContentLoaded", () => {
   state.moon = calculateMoon(new Date());
   state.selectedPhase = state.moon.phaseKey;
+  document.body.dataset.view = "welcomeView";
   renderMoonCard();
   renderHistory();
   bindEvents();
@@ -202,6 +203,7 @@ function startQuiz() {
 }
 
 function showView(id) {
+  document.body.dataset.view = id;
   document.querySelectorAll(".view").forEach((view) => view.classList.toggle("active", view.id === id));
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
