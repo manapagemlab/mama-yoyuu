@@ -1,0 +1,6 @@
+{
+  "name": "ママの余裕診断",
+  "description": "ママの心の余裕を測定し、セルフケアの優先順位を「見える化」する診断アプリ。今のあなたの状態に合わせた、今日からできる小さなセルフケアを提案します。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
