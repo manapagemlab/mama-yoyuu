@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ママの心の余裕を見える化し、月のリズムに合わせたセルフケアを提案する診断アプリ"
+    />
+    <title>ママの余裕見える化診断</title>
+    <link rel="icon" href="./assets/icons/icon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="brand-mark" aria-hidden="true">
+          <span class="heart">♥</span>
+          <span class="flower">✦</span>
+        </div>
+        <div>
+          <p class="eyebrow">5分でできる、今日のご自愛チェック</p>
+          <h1>ママの余裕見える化診断</h1>
+          <p class="lead">
+            気づかないうちに削れている心のゆとりを、からだ・きもち・時間・頼る力・自愛の5つから見える化します。
+          </p>
+        </div>
+      </header>
+
+      <main>
+        <section id="welcomeView" class="view active" aria-labelledby="welcomeTitle">
+          <div class="moon-card">
+            <div class="moon-main">
+              <div class="moon-orb" id="moonIcon" aria-hidden="true">🌙</div>
+              <div>
+                <p class="eyebrow">今日の月のリズム</p>
+                <h2 id="moonPhaseName">計算中...</h2>
+                <p id="moonShortAdvice">今日の月相に合わせたセルフケアを準備しています。</p>
+              </div>
+            </div>
+            <div class="moon-countdown">
+              <span id="nextNewMoon">次の新月: --</span>
+              <span id="nextFullMoon">次の満月: --</span>
+            </div>
+            <button class="text-toggle" id="toggleMoonDetail" type="button">
+              お月様からの今日のアドバイスを詳しく見る
+            </button>
+            <div class="moon-detail" id="moonDetail" hidden>
+              <p id="moonLongAdvice"></p>
+            </div>
+          </div>
+
+          <section class="intro-panel" aria-labelledby="welcomeTitle">
+            <h2 id="welcomeTitle">今のあなたに、いちばん先に戻してほしい余裕を探します。</h2>
+            <p>
+              全10問に答えると、余裕残量ゲージ、5大要素のバー、優先順位つきセルフケア、過去7回の変化グラフが表示されます。
+            </p>
+            <button class="primary-action" id="startButton" type="button">診断をはじめる</button>
+          </section>
+
+          <section class="history-preview" aria-labelledby="historyTitle">
+            <div class="section-heading">
+              <h2 id="historyTitle">ゆとりの変化</h2>
+              <button class="ghost-button" id="clearHistoryButton" type="button">履歴をすべて削除</button>
+            </div>
+            <canvas id="historyCanvas" width="680" height="240" aria-label="過去7回分の余裕残量グラフ"></canvas>
+            <div class="history-list" id="historyList"></div>
+          </section>
+        </section>
+
+        <section id="quizView" class="view" aria-labelledby="quizTitle">
+          <div class="quiz-top">
+            <div>
+              <p class="eyebrow" id="questionCounter">質問 1 / 10</p>
+              <h2 id="quizTitle">今日の状態を教えてください</h2>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <div id="progressBar"></div>
+            </div>
+          </div>
+          <article class="question-card">
+            <p class="question-dimension" id="questionDimension"></p>
+            <h3 id="questionText"></h3>
+            <div class="answer-grid" id="answerGrid"></div>
+            <div class="quiz-actions">
+              <button class="primary-action" id="nextQuestionButton" type="button" disabled>次へ</button>
+            </div>
+          </article>
+        </section>
+
+        <section id="resultView" class="view" aria-labelledby="resultTitle">
+          <div class="result-layout">
+            <section class="score-panel">
+              <p class="eyebrow">診断結果</p>
+              <h2 id="resultTitle">今のゆとり残量</h2>
+              <canvas id="gaugeCanvas" width="320" height="220" aria-label="余裕残量ゲージ"></canvas>
+              <p class="score-copy" id="scoreCopy"></p>
+            </section>
+
+            <section class="dimension-panel">
+              <h2>5つの余裕バランス</h2>
+              <div id="dimensionBars" class="dimension-bars"></div>
+            </section>
+          </div>
+
+          <section class="priority-panel" aria-labelledby="priorityTitle">
+            <div class="section-heading">
+              <h2 id="priorityTitle">セルフケア優先順位</h2>
+              <button class="ghost-button" id="restartButton" type="button">もう一度診断</button>
+            </div>
+            <div id="priorityList" class="priority-list"></div>
+          </section>
+
+          <section class="care-board" aria-labelledby="careBoardTitle">
+            <div class="section-heading">
+              <h2 id="careBoardTitle">月のリズムとご自愛ボード</h2>
+              <span id="activeMoonBadge" class="soft-badge"></span>
+            </div>
+            <div class="tab-row" id="careTabs" role="tablist" aria-label="ケアカテゴリ"></div>
+            <div class="phase-row" id="phaseTabs" role="tablist" aria-label="月相"></div>
+            <article class="care-detail" id="careDetail"></article>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div class="dialog-backdrop" id="confirmDialog" hidden>
+      <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+        <h2 id="dialogTitle">履歴を削除しますか？</h2>
+        <p>端末内に保存された診断履歴をすべて消去します。この操作は元に戻せません。</p>
+        <div class="dialog-actions">
+          <button class="ghost-button" id="cancelClearButton" type="button">キャンセル</button>
+          <button class="danger-button" id="confirmClearButton" type="button">削除する</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/app.js" defer></script>
+  </body>
+</html>

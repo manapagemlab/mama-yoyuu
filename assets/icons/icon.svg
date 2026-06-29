@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">ママの余裕見える化診断 アイコン</title>
+  <desc id="desc">温かなグラデーション背景に、心と花を重ねたアイコン</desc>
+  <defs>
+    <linearGradient id="bg" x1="64" y1="64" x2="448" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E57373"/>
+      <stop offset="1" stop-color="#F0C56F"/>
+    </linearGradient>
+    <linearGradient id="heart" x1="126" y1="122" x2="310" y2="328" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7F3"/>
+      <stop offset="1" stop-color="#F3D5CF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <path fill="url(#heart)" d="M256 356c-8-8-29-25-52-45-61-53-108-95-108-145 0-39 30-70 68-70 24 0 47 13 60 33 13-20 36-33 60-33 38 0 68 31 68 70 0 50-47 92-108 145-23 20-44 37-52 45Z"/>
+  <g fill="#7B541D">
+    <circle cx="352" cy="290" r="18"/>
+    <path d="M352 204c8 39 29 60 68 68-39 8-60 29-68 68-8-39-29-60-68-68 39-8 60-29 68-68Z"/>
+    <path d="M352 245c16 13 31 13 47 0-4 20 4 33 23 42-20 4-29 17-25 38-16-13-31-13-47 0 4-20-4-33-23-42 20-4 29-17 25-38Z" opacity=".5"/>
+  </g>
+</svg>

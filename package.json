@@ -1,0 +1,17 @@
+{
+  "name": "mama-yoyuu-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ママの心のゆとりを見える化し、月のリズムに合わせたセルフケアを提案する静的Webアプリ",
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "check": "node --check assets/js/app.js"
+  },
+  "keywords": [
+    "self-care",
+    "github-pages",
+    "static-site",
+    "moon-phase"
+  ],
+  "license": "UNLICENSED"
+}
