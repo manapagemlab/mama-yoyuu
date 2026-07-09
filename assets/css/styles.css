@@ -125,7 +125,8 @@ h2 {
 .score-panel,
 .dimension-panel,
 .priority-panel,
-.care-board {
+.care-board,
+.community-panel {
   background: rgba(255, 255, 255, 0.74);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -202,7 +203,8 @@ h2 {
 .intro-panel,
 .history-preview,
 .priority-panel,
-.care-board {
+.care-board,
+.community-panel {
   margin-top: 18px;
   padding: 22px;
 }
@@ -439,6 +441,35 @@ h2 {
   padding-left: 1.2em;
 }
 
+.community-panel {
+  background: linear-gradient(135deg, #fff8f4, #fff1cb);
+  border-color: #efd7bd;
+}
+
+.community-panel p:not(.eyebrow) {
+  color: #6e5148;
+  line-height: 1.75;
+}
+
+.line-cta {
+  align-items: center;
+  background: linear-gradient(135deg, #06c755, #44d87c);
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 900;
+  justify-content: center;
+  min-height: 54px;
+  padding: 14px 22px;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(6, 199, 85, 0.22);
+}
+
+.line-cta:hover {
+  filter: brightness(0.98);
+  transform: translateY(-1px);
+}
+
 .dialog-backdrop {
   align-items: center;
   background: rgba(50, 30, 24, 0.4);
@@ -532,7 +563,8 @@ h2 {
   .score-panel,
   .dimension-panel,
   .priority-panel,
-  .care-board {
+  .care-board,
+  .community-panel {
     box-shadow: 0 10px 28px rgba(89, 55, 44, 0.1);
   }
 
@@ -541,6 +573,7 @@ h2 {
   .history-preview,
   .priority-panel,
   .care-board,
+  .community-panel,
   .score-panel,
   .dimension-panel,
   .question-card {
@@ -590,7 +623,8 @@ h2 {
   .primary-action,
   .danger-button,
   .ghost-button,
-  .text-toggle {
+  .text-toggle,
+  .line-cta {
     justify-content: center;
     min-height: 50px;
     width: 100%;
@@ -694,6 +728,7 @@ h2 {
   .history-preview,
   .priority-panel,
   .care-board,
+  .community-panel,
   .score-panel,
   .dimension-panel,
   .question-card {
