@@ -94,6 +94,18 @@ const CARES = {
 const STORAGE_KEY = "mamaYoyuuHistory";
 const SYNODIC_MONTH = 29.530588853;
 const KNOWN_NEW_MOON_UTC = Date.UTC(2000, 0, 6, 18, 14);
+const KNOWN_MOON_CALENDARS = {
+  2026: {
+    newMoons: [
+      [1, 19], [2, 17], [3, 19], [4, 17], [5, 17], [6, 15],
+      [7, 14], [8, 13], [9, 11], [10, 11], [11, 9], [12, 9],
+    ],
+    fullMoons: [
+      [1, 3], [2, 2], [3, 3], [4, 2], [5, 2], [5, 31], [6, 30],
+      [7, 29], [8, 28], [9, 27], [10, 26], [11, 24], [12, 24],
+    ],
+  },
+};
 
 let state = {
   index: 0,
@@ -152,6 +164,9 @@ function closeConfirmDialog() {
 }
 
 function calculateMoon(date) {
+  const knownMoon = calculateKnownMoon(date);
+  if (knownMoon) return knownMoon;
+
   const nowUtc = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 12);
   const daysSince = (nowUtc - KNOWN_NEW_MOON_UTC) / 86400000;
   const age = ((daysSince % SYNODIC_MONTH) + SYNODIC_MONTH) % SYNODIC_MONTH;
@@ -172,6 +187,47 @@ function calculateMoon(date) {
     daysToNextNew,
     daysToFull,
   };
+}
+
+function calculateKnownMoon(date) {
+  const calendar = KNOWN_MOON_CALENDARS[date.getFullYear()];
+  if (!calendar) return null;
+
+  const today = startOfLocalDay(date);
+  const newMoons = calendar.newMoons.map(([month, day]) => localDate(date.getFullYear(), month, day));
+  const fullMoons = calendar.fullMoons.map(([month, day]) => localDate(date.getFullYear(), month, day));
+  const lastNew = [...newMoons].reverse().find((moonDate) => moonDate <= today);
+  const nextNew = newMoons.find((moonDate) => moonDate >= today);
+  const nextFull = fullMoons.find((moonDate) => moonDate >= today);
+
+  if (!lastNew || !nextNew || !nextFull) return null;
+
+  const age = diffDays(lastNew, today);
+  const illumination = Math.round((1 - Math.cos((2 * Math.PI * age) / SYNODIC_MONTH)) * 50);
+  const phaseKey = Object.entries(PHASES).find(([, phase]) => age >= phase.range[0] && age < phase.range[1])[0];
+
+  return {
+    age,
+    illumination,
+    phaseKey,
+    phase: PHASES[phaseKey],
+    nextNewDate: nextNew,
+    nextFullDate: nextFull,
+    daysToNextNew: diffDays(today, nextNew),
+    daysToFull: diffDays(today, nextFull),
+  };
+}
+
+function localDate(year, month, day) {
+  return new Date(year, month - 1, day, 12, 0, 0, 0);
+}
+
+function startOfLocalDay(date) {
+  return localDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+}
+
+function diffDays(fromDate, toDate) {
+  return Math.round((startOfLocalDay(toDate) - startOfLocalDay(fromDate)) / 86400000);
 }
 
 function addDays(date, days) {
